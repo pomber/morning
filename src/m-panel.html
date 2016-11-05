@@ -1,5 +1,6 @@
 <link rel="import" href="../bower_components/polymer/polymer.html">
 <link rel="import" href="../bower_components/iron-flex-layout/iron-flex-layout-classes.html">
+<link rel="import" href="../bower_components/paper-button/paper-button.html">
 
 <dom-module id="m-panel">
   <template>
@@ -8,12 +9,18 @@
         background: red;
         position: absolute;
       }
+
+      paper-button {
+        width: 100%;
+        background: white;
+        color: black;
+      }
     </style>
 
     <div class="layout vertical center center-justified">
       <span>08:41:20</span>
       <span>Wednesday, October 26</span>
-      <span>I'm up!</span>
+      <paper-button raised>I'm up!</paper-button>
     </div>    
   </template>
 
