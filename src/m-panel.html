@@ -1,17 +1,16 @@
 <link rel="import" href="../bower_components/polymer/polymer.html">
+<link rel="import" href="../bower_components/iron-flex-layout/iron-flex-layout-classes.html">
 
 <dom-module id="m-panel">
   <template>
-    <style>
+    <style  include="iron-flex iron-flex-alignment">
       :host {
-        /*width: 80vw;
-        height: 10px;*/
         background: red;
         position: absolute;
       }
     </style>
 
-    <div>
+    <div class="layout vertical center center-justified">
       <span>08:41:20</span>
       <span>Wednesday, October 26</span>
       <span>I'm up!</span>
