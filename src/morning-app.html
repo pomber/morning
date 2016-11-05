@@ -58,15 +58,15 @@
 
       onTimerTick: function(e) {
         var info = e.detail;
-        this.changeTime(info.time);
+        this.changeTime(info.ts);
       },
 
-      onDateChanged: function(state) {
-        this.date = state.date;
+      onDateStringChanged: function(state) {
+        this.date = state.datestring;
       },
 
-      onTimeChanged: function(state) {
-        this.time = state.time;
+      onTimeStringChanged: function(state) {
+        this.time = state.timestring;
       },
 
     });

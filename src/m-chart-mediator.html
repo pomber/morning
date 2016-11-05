@@ -11,7 +11,7 @@
       }
     </style>
 
-    <m-chart-footer today="1478378170896"></m-chart-footer>
+    <m-chart-footer today="[[today]]"></m-chart-footer>
     
   </template>
 
@@ -22,6 +22,12 @@
       behaviors: [Morning.MediatorBehavior],
 
       properties: {
+        today: Number
+      },
+
+      onDayChanged: function(state) {
+        console.log(state.time);
+        this.today = state.time;
       },
 
     });

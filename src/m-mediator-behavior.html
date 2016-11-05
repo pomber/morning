@@ -11,22 +11,39 @@
 
       attached: function() {
         console.log("attached");
-
-        this.changeTime('07:32:15');
-        this.changeDate('Wednesday, October 26');
       },
 
-      changeTime: function(time) {
-        this.state.time = time;
-        this.onTimeChanged(this.state);
+      changeTime: function(ts) {
+        var date = new Date(ts);
+        var timestring = date.toTimeString().split(" ")[0];
+
+        var options = { weekday: 'long', month: 'long', day: 'numeric'};
+        var datestring = date.toLocaleDateString('en-US', options);
+        
+        this.changeTimeString(timestring);
+        this.changeDateString(datestring);
+
+        this.state.time = date.getTime();
+        // this.onTimeChanged(this.state);
       },
 
-      changeDate: function(date) {
-        this.state.date = date;
-        this.onDateChanged(this.state);
+      changeTimeString: function(timestring) {
+        this.state.timestring = timestring;
+        this.onTimeStringChanged(this.state);
       },
 
-      onTimeChanged: function () {},
-      onDateChanged: function () {},
+      changeDateString: function(datestring) {
+        if (this.state.datestring == datestring) {
+          return;
+        }
+
+        this.state.datestring = datestring;
+        this.onDateStringChanged(this.state);
+        this.onDayChanged(this.state);
+      },
+
+      onTimeStringChanged: function () {},
+      onDateStringChanged: function () {},
+      onDayChanged: function () {},
     };
 </script>
