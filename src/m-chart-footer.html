@@ -1,16 +1,31 @@
 <link rel="import" href="../bower_components/polymer/polymer.html">
+<link rel="import" href="../bower_components/iron-flex-layout/iron-flex-layout-classes.html">
 
 <dom-module id="m-chart-footer">
   <template>
-    <style>
+    <style include="iron-flex iron-flex-alignment">
       :host {
-        background: red;
         position: absolute;
-        bottom: 0;        
+        bottom: 0;    
+        width: 100%;   
+        background-color: var(--primary-color); 
+      }
+
+      .axis {
+        padding: 10px 0;
+      }
+
+      .label {
+        font-size: 16px;
+        font-weight: 400;
+        width: 14%;
+        height: 20px;
+        text-align: center;
+        color: var(--secondary-foreground-color);
       }
     </style>
     
-    <div class="axis">
+    <div class="axis layout horizontal center center-justified">
       <template is="dom-repeat" items="[[days]]">
         <span class="label">[[item.label]]</span>
       </template>              
