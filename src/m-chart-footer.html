@@ -34,16 +34,15 @@
         }
       },
 
+      week: ['M', 'T', 'W', 'T', 'F', 'S', 'S'],
+
       getDays: function(ts) {
-        return [
-            { label: "M" },
-            { label: "T" },
-            { label: "W" },
-            { label: "T" },
-            { label: "F" },
-            { label: "S" },
-            { label: "S" },
-          ];
+        var date = new Date(ts);
+        var day = date.getDay();
+        var rotation = this.week;
+        return rotation.map(function (d) {
+          return { label: d };
+        });
       },
     });
   </script>
