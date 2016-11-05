@@ -1,6 +1,7 @@
 <link rel="import" href="../bower_components/polymer/polymer.html">
 <link rel="import" href="../bower_components/paper-styles/color.html">
 <link rel="import" href="m-panel.html">
+<link rel="import" href="m-mediator-behavior.html">
 
 <dom-module id="morning-app">
   <template>
@@ -36,7 +37,7 @@
       }
     </style>
 
-    <m-panel time="08:42:33" date="Wednesday, October 24">
+    <m-panel time="[[time]]" date="[[date]]">
     </m-panel>
   </template>
 
@@ -44,8 +45,19 @@
     Polymer({
 
       is: 'morning-app',
+      behaviors: [Morning.MediatorBehavior],
 
       properties: {
+        time: String,
+        date: String,
+      },
+
+      onDateChanged: function(state) {
+        this.date = state.date;
+      },
+
+      onTimeChanged: function(state) {
+        this.time = state.time;
       },
 
     });
