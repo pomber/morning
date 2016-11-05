@@ -1,0 +1,40 @@
+<link rel="import" href="../bower_components/polymer/polymer.html">
+
+<script>
+
+  Polymer({
+
+    is: 'm-timer',
+    
+    properties: {
+      time: {
+        type: Object,
+        notify: true          
+      },
+      date: {
+        type: Object,
+        notify: true          
+      }
+    },
+
+    ready: function() {
+      this.async(this.tick);      
+    },
+
+    tick: function() {
+      var date = new Date();
+      var info = {
+        date: date,
+        time: date.toTimeString().split(" ")[0],
+        ts: date.getTime()
+      };
+
+      this.set('time', info.time);
+      this.set('date', info.date);
+      this.fire('tick', info);
+      this.async(this.tick, 1000); 
+    }
+
+  });
+
+</script>

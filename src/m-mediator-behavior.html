@@ -1,8 +1,6 @@
-<!--<link rel="import" href="../bower_components/polymer/polymer.html">-->
 <!--<script src="./store.js"></script>-->
 
 <script>
-    // Namespace
     window.Morning = window.Morning || {};
     
     Morning.MediatorBehavior = {
@@ -19,13 +17,13 @@
         },
 
         this.onDateChanged(this.state);
-        this.onTimeChanged(this.state);
+        this.onTimeChanged(this.state);    
       },
 
       changeTime: function(time) {
         this.state.time = time;
         this.onTimeChanged(this.state);
-      }
+      },
     };
 
     // // load data

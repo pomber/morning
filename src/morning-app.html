@@ -1,7 +1,9 @@
 <link rel="import" href="../bower_components/polymer/polymer.html">
 <link rel="import" href="../bower_components/paper-styles/color.html">
-<link rel="import" href="m-panel.html">
+
 <link rel="import" href="m-mediator-behavior.html">
+<link rel="import" href="m-panel.html">
+<link rel="import" href="m-timer.html">
 
 <dom-module id="morning-app">
   <template>
@@ -37,8 +39,8 @@
       }
     </style>
 
-    <m-panel time="[[time]]" date="[[date]]">
-    </m-panel>
+    <m-timer on-tick="onTimerTick"></m-timer>
+    <m-panel time="[[time]]" date="[[date]]"></m-panel>
   </template>
 
   <script>
@@ -50,6 +52,11 @@
       properties: {
         time: String,
         date: String,
+      },
+
+      onTimerTick: function(e) {
+        var info = e.detail;
+        this.changeTime(info.time);
       },
 
       onDateChanged: function(state) {
