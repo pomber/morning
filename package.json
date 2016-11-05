@@ -1,0 +1,24 @@
+{
+  "name": "morning",
+  "version": "1.0.0",
+  "description": "Get up earlier by tracking the time you get out of bed",
+  "main": "index.html",
+  "devDependencies": {
+    "browser-sync": "^2.17.0"
+  },
+  "scripts": {
+    "dev": "browser-sync start --server --files \"*/*.html, src/*.js\" ",
+    "test": "polymer test",
+    "watch": "browser-sync start --proxy localhost:8080 --files \"*/*.html, src/*.js\" "
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pomber/morning.git"
+  },
+  "author": "pomber",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/pomber/morning/issues"
+  },
+  "homepage": "https://github.com/pomber/morning#readme"
+}
