@@ -9,8 +9,6 @@
         bottom: 0;        
       }
     </style>
-
-    [[today]]
     
     <div class="axis">
       <template is="dom-repeat" items="[[days]]">
@@ -26,7 +24,11 @@
       is: 'm-chart-footer',
 
       properties: {
-        //TODO docs
+        
+        /**
+         * Number representing the milliseconds elapsed between 1 January 1970
+         * 00:00:00 UTC and today's date. As returned by new Date().getTime().
+         */
         today: Number,
         days: {
           type: Array,
@@ -39,7 +41,9 @@
       getDays: function(ts) {
         var date = new Date(ts);
         var day = date.getDay();
-        var rotation = this.week;
+        var pre = this.week.slice(day, 7);        
+        var post = this.week.slice(0, day);          
+        var rotation = pre.concat(post);
         return rotation.map(function (d) {
           return { label: d };
         });
