@@ -1,0 +1,29 @@
+<link rel="import" href="../bower_components/polymer/polymer.html">
+
+<link rel="import" href="m-mediator-behavior.html">
+<link rel="import" href="m-chart-footer.html">
+
+<dom-module id="m-chart-mediator">
+  <template>
+    <style>
+      :host {
+        background: red;
+      }
+    </style>
+
+    <m-chart-footer today="something"></m-chart-footer>
+    
+  </template>
+
+  <script>
+    Polymer({
+
+      is: 'm-chart-mediator',
+      behaviors: [Morning.MediatorBehavior],
+
+      properties: {
+      },
+
+    });
+  </script>
+</dom-module>

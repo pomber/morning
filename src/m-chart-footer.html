@@ -1,0 +1,27 @@
+<link rel="import" href="../bower_components/polymer/polymer.html">
+
+<dom-module id="m-chart-footer">
+  <template>
+    <style>
+      :host {
+        background: red;
+      }
+    </style>
+
+    [[today]]
+    
+  </template>
+
+  <script>
+    Polymer({
+
+      is: 'm-chart-footer',
+
+      properties: {
+        //TODO docs
+        today: String,
+      },
+
+    });
+  </script>
+</dom-module>
