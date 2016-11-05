@@ -27,9 +27,15 @@
 
       properties: {
         //TODO docs
-        today: String,
+        today: Number,
         days: {
-          value: [
+          type: Array,
+          computed: 'getDays(today)', 
+        }
+      },
+
+      getDays: function(ts) {
+        return [
             { label: "M" },
             { label: "T" },
             { label: "W" },
@@ -37,10 +43,8 @@
             { label: "F" },
             { label: "S" },
             { label: "S" },
-          ]
-        }
+          ];
       },
-
     });
   </script>
 </dom-module>
