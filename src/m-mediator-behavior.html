@@ -2,35 +2,31 @@
 
 <script>
     window.Morning = window.Morning || {};
+
+    Morning.state = {};
     
     Morning.MediatorBehavior = {
-      properties: {
-        state: Object,
-      },
+      
+      state: Morning.state,
 
       attached: function() {
         console.log("attached");
 
-        this.state = {
-          date: 'Wednesday, October 26',
-          time: '07:32:15'
-        },
-
-        this.onDateChanged(this.state);
-        this.onTimeChanged(this.state);    
+        this.changeTime('07:32:15');
+        this.changeDate('Wednesday, October 26');
       },
 
       changeTime: function(time) {
         this.state.time = time;
         this.onTimeChanged(this.state);
       },
-    };
 
-    // // load data
-    // const req = new XMLHttpRequest();
-    // req.addEventListener('load', function () {
-    //     store.dispatch(ChatView.act.load(JSON.parse(this.responseText)));
-    // });
-    // req.open('GET', '/data/data.json');
-    // req.send();
+      changeDate: function(date) {
+        this.state.date = date;
+        this.onDateChanged(this.state);
+      },
+
+      onTimeChanged: function () {},
+      onDateChanged: function () {},
+    };
 </script>

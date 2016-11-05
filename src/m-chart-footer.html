@@ -6,11 +6,17 @@
       :host {
         background: red;
         position: absolute;
-        bottom: 0;
+        bottom: 0;        
       }
     </style>
 
     [[today]]
+    
+    <div class="axis">
+      <template is="dom-repeat" items="[[days]]">
+        <span class="label">[[item.label]]</span>
+      </template>              
+    </div>
     
   </template>
 
@@ -22,6 +28,17 @@
       properties: {
         //TODO docs
         today: String,
+        days: {
+          value: [
+            { label: "M" },
+            { label: "T" },
+            { label: "W" },
+            { label: "T" },
+            { label: "F" },
+            { label: "S" },
+            { label: "S" },
+          ]
+        }
       },
 
     });
