@@ -1,0 +1,7 @@
+{
+  "name": "morning",
+  "short_name": "morning",
+  "description": "Wake up time tracker",
+  "start_url": "/",
+  "display": "standalone"
+}
