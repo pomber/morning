@@ -1,28 +1,43 @@
 <link rel="import" href="../bower_components/polymer/polymer.html">
 <link rel="import" href="../bower_components/iron-flex-layout/iron-flex-layout-classes.html">
 <link rel="import" href="../bower_components/paper-button/paper-button.html">
+<link rel="import" href="../bower_components/full-width-text/full-width-text.html">
 
 <dom-module id="m-panel">
   <template>
     <style  include="iron-flex iron-flex-alignment">
       :host {
-        background: red;
         position: absolute;
       }
 
       paper-button {
         width: 100%;
         height: 50px;        
+        margin-top: 5px;
         font-size: 1.5em;
 
-        background: rgba(255,255,255, var(--primary-opacity)); 
+        background: var(--primary-foreground-color); 
         color: var(--primary-color);
+      }
+
+      full-width-text {
+        width: 100%; 
+      }
+
+      .time {
+        color: var(--primary-foreground-color);
+        line-height: 0.85em;
+      }
+
+      .date {
+        color: var(--secondary-foreground-color);
+        line-height: 0.85em;
       }
     </style>
 
     <div class="layout vertical center center-justified">
-      <span>08:41:20</span>
-      <span>Wednesday, October 26</span>
+      <full-width-text class="time">08:41:20</full-width-text>
+      <full-width-text class="date">Wednesday, October 26</full-width-text>
       <paper-button raised>I'm up!</paper-button>
     </div>    
   </template>
