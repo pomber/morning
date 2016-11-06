@@ -15,6 +15,15 @@
         position: fixed;
         bottom: 0;
         left: 0;
+        z-index: -1;
+      }
+
+      svg path {
+        stroke-opacity: 0.7;
+        stroke: white;
+        fill: var(--primary-color);
+        stroke-width: 1;
+        stroke-linejoin: round;
       }
 
       svg circle {
@@ -27,13 +36,11 @@
       }
     </style>
 
-    <!--<template is="dom-repeat" items="[[days]]">
-      <div>[[item.hourstring]] - [[item.daystring]] - [[item.minutes]]</div> 
-    </template>-->
-
     <svg id="svg"
       xmlns="http://www.w3.org/2000/svg" version="1.1" 
       viewBox="0 -1 100 1" preserveAspectRatio="xMidYMax">
+      
+      <path d$="[[path]]"></path>
 
       <circle cx$="[[c(cs.*, 0, 'x')]]" cy$="[[c(cs.*, 0, 'y')]]"></circle>
       <circle cx$="[[c(cs.*, 1, 'x')]]" cy$="[[c(cs.*, 1, 'y')]]"></circle>
@@ -57,6 +64,7 @@
 
         hs: Array,
         cs: Array,
+        path: String,
       },
 
       observers: [
@@ -68,13 +76,26 @@
       xs: [ 8, 22, 36, 50, 64, 78, 92],
 
       calc: function() {
+        this.hs = this.getHeights(this.days);        
+        this.cs = this.getCoords();
+        this.path = this.getPath(this.cs);
+      },
+
+      getCoords: function() {
         var self = this;
+        return self.hs.map(function(h, i) {
+          var y = h === null ? null : -self.b - (self.k * h / 100);
+          return {
+            x: self.xs[i],
+            y: y
+          }
+        });
+      },
 
-        console.log('ds', self.days);
-
+      getHeights: function(days) {       
         var min = 60 * 24;
         var max = 0;
-        self.days.forEach(function(day) {
+        days.forEach(function(day) {
           if (!day.minutes) {
             return;
           }
@@ -82,10 +103,7 @@
           max = Math.max(max, day.minutes);
         });
 
-        console.log('min', min);
-        console.log('max', max);
-
-        self.hs = self.days.map(function(day) {
+        return days.map(function(day) {
           if (!day.minutes) {
             return null;
           }
@@ -96,19 +114,35 @@
 
           return 100 * (day.minutes - min) / (max - min);
         });
+      },
 
-        console.log('hs', self.hs);
-        
-        self.cs = self.hs.map(function(h, i) {
-          var y = h === null ? null : -self.b - (self.k * h / 100);
-          return {
-            x: self.xs[i],
-            y: y
-          }
-        });
+      getPath: function(cs) {
+        var y0 = cs[0].y;
+        var i = 0;
+        while(!y0 && i < cs.length) {
+          y0 = cs[i++].y;
+        }
 
+        if (!y0) return ''; 
 
-        console.log('cs', self.cs);
+        var path = 'M-5 ' + y0;
+        var prev = {x: -5, y: y0};
+
+        for (var i = 0; i < cs.length; i++) {
+          var c = cs[i];
+          if (!c.y) continue;
+
+          path += ' C'
+            + (prev.x + c.x) / 2 + ' ' + prev.y + ' '
+            + (prev.x + c.x) / 2 + ' ' + c.y + ' ' 
+            + c.x + ' ' + c.y;
+
+          prev = c;
+        }
+
+        path += ' h100 v500 h-500';
+        console.log(path);
+        return path;
       },
       
       c: function(change, index, path) {
