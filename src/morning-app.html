@@ -43,7 +43,7 @@
 
       attached: function() {
         this.state = {
-          log: [{time:20}]
+          log: []
         };
       },
 
@@ -67,7 +67,7 @@
 
       onTimeLog: function() {
         var time = this.state.time;
-        this.push('state.log', {time: time});
+        this.push('state.log', time);
       }
 
     });

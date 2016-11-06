@@ -39,7 +39,14 @@
       },
 
       onLogChanged: function() {
-        this.days = this.state.log.concat([]);
+        this.days = this.state.log.slice(-7)
+          .map(function(ts){
+          return {
+            hourstring: '20:12:23',
+            daystring: 'Wed',
+            timestamp: ts,
+          };
+        });
       }
 
     });
