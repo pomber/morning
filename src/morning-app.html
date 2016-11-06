@@ -1,10 +1,7 @@
 <link rel="import" href="../bower_components/polymer/polymer.html">
 <link rel="import" href="../bower_components/paper-styles/color.html">
 
-<link rel="import" href="m-mediator-behavior.html">
-<link rel="import" href="m-chart-mediator.html">
-<link rel="import" href="m-panel.html">
-<link rel="import" href="m-timer.html">
+<link rel="import" href="m-app-mediator.html">
 
 <dom-module id="morning-app">
   <template>
@@ -30,43 +27,18 @@
           var(--primary-color-light), 
           var(--primary-color-dark) 55%);
       }
-
-      m-panel {
-        position: relative;
-        display: block;
-        width: 80vw;
-        max-width: 500px;
-        margin: 5vh auto 0;
-      }
     </style>
-
-    <m-timer on-tick="onTimerTick"></m-timer>
-    <m-panel time="[[time]]" date="[[date]]"></m-panel>
-    <m-chart-mediator></m-chart-mediator>
+    
+    <m-app-mediator></m-chart-mediator>
   </template>
 
   <script>
     Polymer({
 
       is: 'morning-app',
-      behaviors: [Morning.MediatorBehavior],
 
       properties: {
-        time: String,
-        date: String,
-      },
-
-      onTimerTick: function(e) {
-        var info = e.detail;
-        this.changeTime(info.ts);
-      },
-
-      onDateStringChanged: function(state) {
-        this.date = state.datestring;
-      },
-
-      onTimeStringChanged: function(state) {
-        this.time = state.timestring;
+        state: Object,
       },
 
     });
