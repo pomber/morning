@@ -7,13 +7,43 @@
         position: absolute;
         top: 50%;
         left: 30%;
-        background-color: red; 
+      }
+
+      svg {
+        width: 100vw;
+        height: 100vh;
+        position: fixed;
+        bottom: 0;
+        left: 0;
+      }
+
+      svg circle {
+        r: 1;
+        fill: white;
+        fill-opacity: 0.7;
+        stroke: white;
+        stroke-width: 2.5;
+        stroke-opacity: 0.3;
       }
     </style>
-    
-    <template is="dom-repeat" items="[[days]]">
+
+    <!--<template is="dom-repeat" items="[[days]]">
       <div>[[item.hourstring]] - [[item.daystring]] - [[item.minutes]]</div> 
-    </template>
+    </template>-->
+
+    <svg id="svg"
+      xmlns="http://www.w3.org/2000/svg" version="1.1" 
+      viewBox="0 -1 100 1" preserveAspectRatio="xMidYMax">
+
+      <circle cx$="[[c(cs.*, 0, 'x')]]" cy$="[[c(cs.*, 0, 'y')]]"></circle>
+      <circle cx$="[[c(cs.*, 1, 'x')]]" cy$="[[c(cs.*, 1, 'y')]]"></circle>
+      <circle cx$="[[c(cs.*, 2, 'x')]]" cy$="[[c(cs.*, 2, 'y')]]"></circle>      
+      <circle cx$="[[c(cs.*, 3, 'x')]]" cy$="[[c(cs.*, 3, 'y')]]"></circle>
+      <circle cx$="[[c(cs.*, 4, 'x')]]" cy$="[[c(cs.*, 4, 'y')]]"></circle>
+      <circle cx$="[[c(cs.*, 5, 'x')]]" cy$="[[c(cs.*, 5, 'y')]]"></circle>
+      <circle cx$="[[c(cs.*, 6, 'x')]]" cy$="[[c(cs.*, 6, 'y')]]"></circle>
+
+    </svg>
     
   </template>
 
@@ -24,7 +54,69 @@
 
       properties: {
         days: Array,
+
+        hs: Array,
+        cs: Array,
       },
+
+      observers: [
+        'calc(days.*)'
+      ],
+
+      b: 20,
+      k: 40,
+      xs: [ 8, 22, 36, 50, 64, 78, 92],
+
+      calc: function() {
+        var self = this;
+
+        console.log('ds', self.days);
+
+        var min = 60 * 24;
+        var max = 0;
+        self.days.forEach(function(day) {
+          if (!day.minutes) {
+            return;
+          }
+          min = Math.min(min, day.minutes);
+          max = Math.max(max, day.minutes);
+        });
+
+        console.log('min', min);
+        console.log('max', max);
+
+        self.hs = self.days.map(function(day) {
+          if (!day.minutes) {
+            return null;
+          }
+
+          if (min == max) {
+            return 50;
+          }
+
+          return 100 * (day.minutes - min) / (max - min);
+        });
+
+        console.log('hs', self.hs);
+        
+        self.cs = self.hs.map(function(h, i) {
+          var y = h === null ? null : -self.b - (self.k * h / 100);
+          return {
+            x: self.xs[i],
+            y: y
+          }
+        });
+
+
+        console.log('cs', self.cs);
+      },
+      
+      c: function(change, index, path) {
+        var v = this.get(path, change.base[index]);
+        if (v || v === 0) return v;
+        return 10;
+      },
+
     });
   </script>
 </dom-module>
