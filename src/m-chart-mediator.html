@@ -40,14 +40,21 @@
 
       onLogChanged: function() {
         this.days = this.state.log.slice(-7)
-          .map(function(ts){
-          return {
-            hourstring: '20:12:23',
-            daystring: 'Wed',
-            timestamp: ts,
-          };
+          .map(function(ts) {
+            var date = new Date(ts);
+            var hourstring = date.toTimeString().split(" ")[0].slice(0, 5);
+            var daystring = date.toLocaleDateString('en-US', {weekday:'short'});
+            return {
+              hourstring: hourstring,
+              daystring: daystring,
+              timestamp: ts,
+            };
         });
-      }
+      },
+
+      _getTime: function(date) {        
+        return date.toTimeString().split(" ")[0].slice(0, 5);
+      },
 
     });
   </script>
