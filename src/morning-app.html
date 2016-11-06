@@ -41,15 +41,12 @@
         state: Object,
       },
 
-      attached: function() {
-        this.state = {
-          log: [1468000500000, 1478000500000, 1478170000000, 1478340000000, 147870000000]
-        };
-      },
+      attached: function() {      },
 
       listeners: {
         'm-time-change': 'onTimeChange',
         'm-log-time': 'onTimeLog',
+        'm-load-state': 'onLoadState'
       },
 
       onTimeChange: function(e) {
@@ -68,7 +65,11 @@
       onTimeLog: function() {
         var time = this.state.time;
         this.push('state.log', time);
-      }
+      },
+
+      onLoadState: function(e) {
+        this.state = e.detail;
+      },
 
     });
   </script>

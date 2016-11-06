@@ -1,0 +1,26 @@
+<link rel="import" href="../bower_components/polymer/polymer.html">
+
+<dom-module id="m-storage-mediator">
+  <template>
+  </template>
+
+  <script>
+    Polymer({
+
+      is: 'm-storage-mediator',
+
+      properties: {
+        state: Object,
+      },
+      
+      attached: function() {        
+        var state = {
+          log: [1468000500000, 1478000500000, 1478170000000, 1478340000000, 147870000000]
+        };
+
+        this.fire('m-load-state', state);
+      },
+
+    });
+  </script>
+</dom-module>

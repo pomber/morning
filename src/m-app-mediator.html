@@ -1,6 +1,6 @@
 <link rel="import" href="../bower_components/polymer/polymer.html">
 
-<link rel="import" href="m-mediator-behavior.html">
+<link rel="import" href="m-storage-mediator.html">
 <link rel="import" href="m-chart-mediator.html">
 <link rel="import" href="m-panel.html">
 <link rel="import" href="m-timer.html">
@@ -17,6 +17,7 @@
       }
     </style>
 
+    <m-storage-mediator state="[[state]]"></m-storage-mediator>
     <m-timer on-tick="onTimerTick"></m-timer>
     <m-panel time="[[time]]" date="[[date]]" on-log-time="onLogTime"></m-panel>
     <m-chart-mediator state="[[state]]"></m-chart-mediator>
