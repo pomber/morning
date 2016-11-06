@@ -29,7 +29,7 @@
       }
     </style>
     
-    <m-app-mediator></m-chart-mediator>
+    <m-app-mediator state="[[state]]"></m-chart-mediator>
   </template>
 
   <script>
@@ -40,6 +40,27 @@
       properties: {
         state: Object,
       },
+
+      attached: function() {
+        this.state = {};
+      },
+
+      listeners: {
+        'm-time-change': 'onTimeChange',
+      },
+
+      onTimeChange: function(e) {
+        var ts = e.detail;
+        
+        var date = new Date(ts);
+        var timestring = date.toTimeString().split(" ")[0];
+        var options = { weekday: 'long', month: 'long', day: 'numeric'};
+        var datestring = date.toLocaleDateString('en-US', options);
+        
+        this.set('state.time', ts);
+        this.set('state.timestring', timestring);
+        this.set('state.datestring', datestring);
+      }
 
     });
   </script>

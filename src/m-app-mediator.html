@@ -1,5 +1,4 @@
 <link rel="import" href="../bower_components/polymer/polymer.html">
-<link rel="import" href="../bower_components/paper-styles/color.html">
 
 <link rel="import" href="m-mediator-behavior.html">
 <link rel="import" href="m-chart-mediator.html">
@@ -20,31 +19,36 @@
 
     <m-timer on-tick="onTimerTick"></m-timer>
     <m-panel time="[[time]]" date="[[date]]"></m-panel>
-    <m-chart-mediator></m-chart-mediator>
+    <m-chart-mediator state="[[state]]"></m-chart-mediator>
   </template>
 
   <script>
     Polymer({
 
       is: 'm-app-mediator',
-      behaviors: [Morning.MediatorBehavior],
 
       properties: {
+        state: Object,
         time: String,
         date: String,
       },
 
+      observers: [
+        'onDateStringChanged(state.datestring)',
+        'onTimeStringChanged(state.timestring)',
+      ],
+
       onTimerTick: function(e) {
         var info = e.detail;
-        this.changeTime(info.ts);
+        this.fire('m-time-change', info.ts);
       },
 
-      onDateStringChanged: function(state) {
-        this.date = state.datestring;
+      onDateStringChanged: function(datestring) {
+        this.date = datestring;
       },
 
-      onTimeStringChanged: function(state) {
-        this.time = state.timestring;
+      onTimeStringChanged: function(timestring) {
+        this.time = timestring;
       },
 
     });

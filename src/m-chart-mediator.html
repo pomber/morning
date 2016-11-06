@@ -19,15 +19,18 @@
     Polymer({
 
       is: 'm-chart-mediator',
-      behaviors: [Morning.MediatorBehavior],
 
       properties: {
+        state: Object,
         today: Number
       },
 
-      onDayChanged: function(state) {
-        console.log(state.time);
-        this.today = state.time;
+      observers: [
+        'onDateStringChanged(state.datestring)',
+      ],
+
+      onDateStringChanged: function() {
+        this.today = this.state.time;
       },
 
     });
