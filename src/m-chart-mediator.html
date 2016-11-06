@@ -1,6 +1,7 @@
 <link rel="import" href="../bower_components/polymer/polymer.html">
 
-<link rel="import" href="m-mediator-behavior.html">
+<link rel="import" href="utils.html">
+
 <link rel="import" href="m-chart-footer.html">
 <link rel="import" href="m-chart.html">
 
@@ -39,23 +40,9 @@
       },
 
       onLogChanged: function() {
-        this.days = this.state.log.slice(-7)
-          .map(function(ts) {
-            var date = new Date(ts);
-            var hourstring = date.toTimeString().split(" ")[0].slice(0, 5);
-            var daystring = date.toLocaleDateString('en-US', {weekday:'short'});
-            var minutes = date.getHours() * 60 + date.getMinutes();
-            return {
-              hourstring: hourstring,
-              daystring: daystring,
-              minutes: minutes,
-              timestamp: ts,
-            };
-        });
-      },
-
-      _getTime: function(date) {        
-        return date.toTimeString().split(" ")[0].slice(0, 5);
+        this.days = this.state.log
+          .slice(-7)
+          .map(Utils.getDayInfo);
       },
 
     });
