@@ -36,7 +36,7 @@
     <div class="layout vertical center-justified center">
       <full-width-text class="time">[[time]]</full-width-text>
       <full-width-text class="date">[[date]]</full-width-text>
-      <paper-button raised>I'm up!</paper-button>
+      <paper-button raised on-tap="onTap">I'm up!</paper-button>
     </div>    
   </template>
 
@@ -49,6 +49,10 @@
         time: String,
         date: String,        
       },
+
+      onTap: function() {
+        this.fire('log-time');
+      }
 
     });
   </script>

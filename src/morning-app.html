@@ -42,11 +42,14 @@
       },
 
       attached: function() {
-        this.state = {};
+        this.state = {
+          log: []
+        };
       },
 
       listeners: {
         'm-time-change': 'onTimeChange',
+        'm-log-time': 'onTimeLog',
       },
 
       onTimeChange: function(e) {
@@ -60,6 +63,12 @@
         this.set('state.time', ts);
         this.set('state.timestring', timestring);
         this.set('state.datestring', datestring);
+      },
+
+      onTimeLog: function() {
+        var time = this.state.time;
+        this.push('state.log', time);
+        console.log(time);
       }
 
     });

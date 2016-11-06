@@ -18,7 +18,7 @@
     </style>
 
     <m-timer on-tick="onTimerTick"></m-timer>
-    <m-panel time="[[time]]" date="[[date]]"></m-panel>
+    <m-panel time="[[time]]" date="[[date]]" on-log-time="onLogTime"></m-panel>
     <m-chart-mediator state="[[state]]"></m-chart-mediator>
   </template>
 
@@ -41,6 +41,10 @@
       onTimerTick: function(e) {
         var info = e.detail;
         this.fire('m-time-change', info.ts);
+      },
+
+      onLogTime: function(e) {
+        this.fire('m-log-time');
       },
 
       onDateStringChanged: function(datestring) {
