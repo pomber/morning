@@ -32,7 +32,7 @@
 
       observers: [
         'onDateStringChanged(state.datestring)',
-        'onLogChanged(state.log.*)',
+        'onLogChanged(state.log.*, state.datestring)',
       ],
 
       onDateStringChanged: function() {
@@ -40,9 +40,7 @@
       },
 
       onLogChanged: function() {
-        this.days = this.state.log
-          .slice(-7)
-          .map(Utils.getDayInfo);
+        this.days = Utils.getLastWeek(this.state.time, this.state.log);
       },
 
     });
