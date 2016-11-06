@@ -2,15 +2,17 @@
 
 <link rel="import" href="m-mediator-behavior.html">
 <link rel="import" href="m-chart-footer.html">
+<link rel="import" href="m-chart.html">
 
 <dom-module id="m-chart-mediator">
   <template>
     <style>
       :host {
-        display: fixed;
+        position: inherit;
       }
     </style>
 
+    <m-chart days="[[days]]"></m-chart>
     <m-chart-footer today="[[today]]"></m-chart-footer>
     
   </template>
@@ -22,16 +24,23 @@
 
       properties: {
         state: Object,
+
+        days: Array,
         today: Number
       },
 
       observers: [
         'onDateStringChanged(state.datestring)',
+        'onLogChanged(state.log.*)',
       ],
 
       onDateStringChanged: function() {
         this.today = this.state.time;
       },
+
+      onLogChanged: function() {
+        this.days = this.state.log;
+      }
 
     });
   </script>

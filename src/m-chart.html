@@ -1,0 +1,32 @@
+<link rel="import" href="../bower_components/polymer/polymer.html">
+
+<dom-module id="m-chart">
+  <template>
+    <style>
+      :host {
+        position: absolute;
+        top: 50%;
+        left: 30%;
+        background-color: red; 
+      }
+    </style>
+    
+    Chart
+
+    <template is="dom-repeat" items="[[days]]">
+      [[item]]
+    </template>
+    
+  </template>
+
+  <script>
+    Polymer({
+
+      is: 'm-chart',
+
+      properties: {
+        days: Array,
+      },
+    });
+  </script>
+</dom-module>
