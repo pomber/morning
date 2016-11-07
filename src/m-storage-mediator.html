@@ -14,8 +14,26 @@
       },
       
       attached: function() {        
+
+        var days = [
+          { delta: -6, hour: 7, minutes: 15 },
+          { delta: -5, hour: 8, minutes:  9 },
+          { delta: -3, hour: 7, minutes:  5 },
+          { delta: -2, hour: 7, minutes: 30 },
+          { delta:  0, hour: 7, minutes: 10 },
+        ];
+
+        var today = new Date();
+        var log = days.map(function(info) {
+          var date = new Date(today);
+          date.setDate(today.getDate() + info.delta);
+          date.setHours(info.hour);
+          date.setMinutes(info.minutes);
+          return date.getTime();          
+        });
+
         var state = {
-          log: [1468000500000, 1478000500000, 1478170000000, 1478340000000, 147870000000]
+          log: log
         };
 
         this.fire('m-load-state', state);
