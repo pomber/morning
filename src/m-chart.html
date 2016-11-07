@@ -70,12 +70,12 @@
       <circle cx$="[[c(cs.*, 6, 'x')]]" cy$="[[c(cs.*, 6, 'y')]]"></circle>
 
       <line x1$="[[xmin]]" x2$="[[xmin]]" y1$="[[ymin]]" y2$="[[yminstart]]"></line>
-      <text x$="[[xmin]]" y$="[[yminstart]]" dx="1" dy="3">07:10</text>
-      <text x$="[[xmin]]" y$="[[yminstart]]" dx="1" dy="8" class="mute">wed</text>
+      <text x$="[[xmin]]" y$="[[yminstart]]" dx="1" dy="3">[[mintime]]</text>
+      <text x$="[[xmin]]" y$="[[yminstart]]" dx="1" dy="8" class="mute">[[minday]]</text>
 
       <line x1$="[[xmax]]" x2$="[[xmax]]" y1$="[[ymax]]" y2$="[[ymaxstart]]"></line>
-      <text x$="[[xmax]]" y$="[[ymaxstart]]" dx="1" dy="3">08:40</text>
-      <text x$="[[xmax]]" y$="[[ymaxstart]]" dx="1" dy="8" class="mute">fri</text>
+      <text x$="[[xmax]]" y$="[[ymaxstart]]" dx="1" dy="3">[[maxtime]]</text>
+      <text x$="[[xmax]]" y$="[[ymaxstart]]" dx="1" dy="8" class="mute">[[maxday]]</text>
     </svg>
     
   </template>
@@ -95,10 +95,14 @@
         xmin: Number,
         ymin: Number,
         yminstart: { value: -75 },
+        mintime: String,
+        minday: String,
 
         xmax: Number,
         ymax: Number,
         ymaxstart: { value: -80 },
+        maxtime: String,
+        maxday: String,
       },
 
       observers: [
@@ -132,9 +136,13 @@
 
         this.xmin = this.xs[imax];
         this.ymin = this.cs[imax].y;
+        this.mintime = this.days[imax].hourstring;
+        this.minday = this.days[imax].daystring;
 
         this.xmax = this.xs[imin];
         this.ymax = this.cs[imin].y;
+        this.maxtime = this.days[imin].hourstring;
+        this.maxday = this.days[imin].daystring;
 
         
       },
