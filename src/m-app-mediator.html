@@ -19,7 +19,11 @@
 
     <m-storage-mediator state="[[state]]"></m-storage-mediator>
     <m-timer on-tick="onTimerTick"></m-timer>
-    <m-panel time="[[time]]" date="[[date]]" on-log-time="onLogTime"></m-panel>
+
+    <template is="dom-if" if="[[showPanel]]">
+      <m-panel time="[[time]]" date="[[date]]" on-log-time="onLogTime"></m-panel>
+    </template>
+
     <m-chart-mediator state="[[state]]"></m-chart-mediator>
   </template>
 
@@ -30,13 +34,16 @@
 
       properties: {
         state: Object,
+
         time: String,
         date: String,
+        showPanel: Boolean,
       },
 
       observers: [
         'onDateStringChanged(state.datestring)',
         'onTimeStringChanged(state.timestring)',
+        'onLogChanged(state.log.*, state.datestring)',
       ],
 
       onTimerTick: function(e) {
@@ -54,6 +61,13 @@
 
       onTimeStringChanged: function(timestring) {
         this.time = timestring;
+      },
+
+      onLogChanged: function() {
+        var last = this.state.log[this.state.log.length - 1];
+        var lastDate = new Date(last);
+        var nowDate = new Date(this.state.time);        
+        this.showPanel = lastDate.toDateString() != nowDate.toDateString();
       },
 
     });
