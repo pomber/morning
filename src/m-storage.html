@@ -7,7 +7,7 @@
     <iron-localstorage
       id="localstorage"
       name="m-storage" 
-      value="{{data}}"
+      value="{{_data}}"
       auto-save-disabled
       on-iron-localstorage-load="onLoad">
     </iron-localstorage>
@@ -19,7 +19,7 @@
       
       properties: {
         log: Array,
-        data: Object,
+        _data: Object,
       },
 
       observers: [
@@ -27,13 +27,12 @@
       ],
 
       onLogChange: function() {
-        console.log("log changed");
-        this.data = this.log;
+        this._data = this.log;
         this.$.localstorage.save();
       },
 
       onLoad: function() {
-        console.log("storage loaded", this.data);
+        this.fire("storage-load", this._data);
       },
 
     });

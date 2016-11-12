@@ -3,7 +3,9 @@
 
 <dom-module id="m-storage-mediator">
   <template>
-    <m-storage log="[[state.log]]"></m-storage>
+    <m-storage 
+      log="[[state.log]]"
+      on-storage-load="onLoad"></m-storage>
   </template>
 
   <script>
@@ -14,9 +16,24 @@
       properties: {
         state: Object,
       },
-      
-      attached: function() {        
 
+      onLoad: function(e) {
+        var log = e.detail;
+
+        if (this.mock) {
+          log = this._getMock();
+        }
+
+        var state = {
+          log: log
+        };
+
+        this.fire('m-load-state', state);
+      },
+
+      mock: false,      
+
+      _getMock: function() {
         var days = [
           { delta: -6, hour: 7, minutes: 15 },
           { delta: -5, hour: 8, minutes:  9 },
@@ -35,11 +52,7 @@
           return date.getTime();          
         });
 
-        var state = {
-          log: log
-        };
-
-        this.fire('m-load-state', state);
+        return log;
       },
 
     });
