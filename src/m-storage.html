@@ -1,0 +1,42 @@
+<link rel="import" href="../bower_components/polymer/polymer.html">
+<link rel="import" href="../bower_components/iron-localstorage/iron-localstorage.html">
+
+<dom-module id="m-storage">
+
+  <template>
+    <iron-localstorage
+      id="localstorage"
+      name="m-storage" 
+      value="{{data}}"
+      auto-save-disabled
+      on-iron-localstorage-load="onLoad">
+    </iron-localstorage>
+  </template>
+
+  <script>
+    Polymer({
+      is: 'm-storage',
+      
+      properties: {
+        log: Array,
+        data: Object,
+      },
+
+      observers: [
+        'onLogChange(log.*)'
+      ],
+
+      onLogChange: function() {
+        console.log("log changed");
+        this.data = this.log;
+        this.$.localstorage.save();
+      },
+
+      onLoad: function() {
+        console.log("storage loaded", this.data);
+      },
+
+    });
+  </script>
+
+</dom-module>

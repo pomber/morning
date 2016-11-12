@@ -6,6 +6,7 @@
     "polymer": "Polymer/polymer#^1.4.0",
     "paper-styles": "PolymerElements/paper-styles#^1.1.5",
     "paper-button": "PolymerElements/paper-button#^1.0.14",
-    "full-width-text": "^0.2.1"
+    "full-width-text": "^0.2.1",
+    "iron-localstorage": "PolymerElements/iron-localstorage#^1.0.6"
   }
 }
