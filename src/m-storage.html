@@ -9,7 +9,8 @@
       name="m-storage" 
       value="{{_data}}"
       auto-save-disabled
-      on-iron-localstorage-load="onLoad">
+      on-iron-localstorage-load="onLoad"
+      on-iron-localstorage-load-empty="onEmptyStorage">
     </iron-localstorage>
   </template>
 
@@ -33,6 +34,10 @@
 
       onLoad: function() {
         this.fire("storage-load", this._data);
+      },
+
+      onEmptyStorage: function() {
+        this.fire("storage-load", []);
       },
 
     });

@@ -18,9 +18,10 @@
       },
 
       onLoad: function(e) {
+        console.log("on load");
         var log = e.detail;
 
-        if (this.mock) {
+        if (!log.length || this.mock) {
           log = this._getMock();
         }
 
