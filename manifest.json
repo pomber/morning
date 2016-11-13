@@ -1,13 +1,15 @@
 {
-  "name": "morning",
-  "short_name": "morning",
+  "name": "Morning",
+  "short_name": "Morning",
   "description": "Wake up time tracker",
   "start_url": ".",
   "display": "standalone",
+  "orientation": "portrait",
   "background_color": "#29b6f6",
   "icons": [
     {
       "src": "icon.png",
+      "sizes": "192x192",
       "type": "image/png"
     }
   ]
