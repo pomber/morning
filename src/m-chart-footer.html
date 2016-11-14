@@ -1,7 +1,7 @@
-<link rel="import" href="../bower_components/polymer/polymer.html">
+<html><head><link rel="import" href="../bower_components/polymer/polymer.html">
 <link rel="import" href="../bower_components/iron-flex-layout/iron-flex-layout-classes.html">
 
-<dom-module id="m-chart-footer">
+</head><body><dom-module id="m-chart-footer">
   <template>
     <style include="iron-flex iron-flex-alignment">
       :host {
@@ -33,36 +33,6 @@
     
   </template>
 
-  <script>
-    Polymer({
-
-      is: 'm-chart-footer',
-
-      properties: {
-        
-        /**
-         * Number representing the milliseconds elapsed between 1 January 1970
-         * 00:00:00 UTC and today's date. As returned by new Date().getTime().
-         */
-        today: Number,
-        days: {
-          type: Array,
-          computed: 'getDays(today)', 
-        }
-      },
-
-      week: ['M', 'T', 'W', 'T', 'F', 'S', 'S'],
-
-      getDays: function(ts) {
-        var date = new Date(ts);
-        var day = date.getDay();
-        var pre = this.week.slice(day, 7);        
-        var post = this.week.slice(0, day);          
-        var rotation = pre.concat(post);
-        return rotation.map(function (d) {
-          return { label: d };
-        });
-      },
-    });
-  </script>
+  <script>Polymer({is:"m-chart-footer",properties:{today:Number,days:{type:Array,computed:"getDays(today)"}},week:["M","T","W","T","F","S","S"],getDays:function(e){var t=new Date(e),a=t.getDay(),r=this.week.slice(a,7),o=this.week.slice(0,a),s=r.concat(o);return s.map(function(e){return{label:e}})}});</script>
 </dom-module>
+</body></html>

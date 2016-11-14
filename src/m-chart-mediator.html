@@ -1,11 +1,11 @@
-<link rel="import" href="../bower_components/polymer/polymer.html">
+<html><head><link rel="import" href="../bower_components/polymer/polymer.html">
 
 <link rel="import" href="utils.html">
 
 <link rel="import" href="m-chart-footer.html">
 <link rel="import" href="m-chart.html">
 
-<dom-module id="m-chart-mediator">
+</head><body><dom-module id="m-chart-mediator">
   <template>
     <style>
       :host {
@@ -18,31 +18,6 @@
     
   </template>
 
-  <script>
-    Polymer({
-
-      is: 'm-chart-mediator',
-
-      properties: {
-        state: Object,
-
-        days: Array,
-        today: Number
-      },
-
-      observers: [
-        'onDateStringChanged(state.datestring)',
-        'onLogChanged(state.log.*, state.datestring)',
-      ],
-
-      onDateStringChanged: function() {
-        this.today = this.state.time;
-      },
-
-      onLogChanged: function() {
-        this.days = Utils.getLastWeek(this.state.time, this.state.log);
-      },
-
-    });
-  </script>
+  <script>Polymer({is:"m-chart-mediator",properties:{state:Object,days:Array,today:Number},observers:["onDateStringChanged(state.datestring)","onLogChanged(state.log.*, state.datestring)"],onDateStringChanged:function(){this.today=this.state.time},onLogChanged:function(){this.days=Utils.getLastWeek(this.state.time,this.state.log)}});</script>
 </dom-module>
+</body></html>

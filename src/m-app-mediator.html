@@ -1,11 +1,11 @@
-<link rel="import" href="../bower_components/polymer/polymer.html">
+<html><head><link rel="import" href="../bower_components/polymer/polymer.html">
 
 <link rel="import" href="m-storage-mediator.html">
 <link rel="import" href="m-chart-mediator.html">
 <link rel="import" href="m-panel.html">
 <link rel="import" href="m-timer.html">
 
-<dom-module id="m-app-mediator">
+</head><body><dom-module id="m-app-mediator">
   <template>
     <style>
       m-panel {
@@ -27,49 +27,6 @@
     <m-chart-mediator state="[[state]]"></m-chart-mediator>
   </template>
 
-  <script>
-    Polymer({
-
-      is: 'm-app-mediator',
-
-      properties: {
-        state: Object,
-
-        time: String,
-        date: String,
-        showPanel: Boolean,
-      },
-
-      observers: [
-        'onDateStringChanged(state.datestring)',
-        'onTimeStringChanged(state.timestring)',
-        'onLogChanged(state.log.*, state.datestring)',
-      ],
-
-      onTimerTick: function(e) {
-        var info = e.detail;
-        this.fire('m-time-change', info.ts);
-      },
-
-      onLogTime: function(e) {
-        this.fire('m-log-time');
-      },
-
-      onDateStringChanged: function(datestring) {
-        this.date = datestring;
-      },
-
-      onTimeStringChanged: function(timestring) {
-        this.time = timestring;
-      },
-
-      onLogChanged: function() {
-        var last = this.state.log[this.state.log.length - 1];
-        var lastDate = new Date(last);
-        var nowDate = new Date(this.state.time);        
-        this.showPanel = lastDate.toDateString() != nowDate.toDateString();
-      },
-
-    });
-  </script>
+  <script>Polymer({is:"m-app-mediator",properties:{state:Object,time:String,date:String,showPanel:Boolean},observers:["onDateStringChanged(state.datestring)","onTimeStringChanged(state.timestring)","onLogChanged(state.log.*, state.datestring)"],onTimerTick:function(t){var e=t.detail;this.fire("m-time-change",e.ts)},onLogTime:function(t){this.fire("m-log-time")},onDateStringChanged:function(t){this.date=t},onTimeStringChanged:function(t){this.time=t},onLogChanged:function(){var t=this.state.log[this.state.log.length-1],e=new Date(t),n=new Date(this.state.time);this.showPanel=e.toDateString()!=n.toDateString()}});</script>
 </dom-module>
+</body></html>

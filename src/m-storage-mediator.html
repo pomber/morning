@@ -1,61 +1,11 @@
-<link rel="import" href="../bower_components/polymer/polymer.html">
+<html><head><link rel="import" href="../bower_components/polymer/polymer.html">
 <link rel="import" href="m-storage.html">
 
-<dom-module id="m-storage-mediator">
+</head><body><dom-module id="m-storage-mediator">
   <template>
-    <m-storage 
-      log="[[state.log]]"
-      on-storage-load="onLoad"></m-storage>
+    <m-storage log="[[state.log]]" on-storage-load="onLoad"></m-storage>
   </template>
 
-  <script>
-    Polymer({
-
-      is: 'm-storage-mediator',
-
-      properties: {
-        state: Object,
-      },
-
-      onLoad: function(e) {
-        console.log("on load");
-        var log = e.detail;
-
-        if (!log.length || this.mock) {
-          log = this._getMock();
-        }
-
-        var state = {
-          log: log
-        };
-
-        this.fire('m-load-state', state);
-      },
-
-      mock: false,      
-
-      _getMock: function() {
-        var days = [
-          { delta: -6, hour: 7, minutes: 15 },
-          { delta: -5, hour: 8, minutes:  9 },
-          { delta: -4, hour: 7, minutes:  1 },
-          { delta: -3, hour: 7, minutes:  5 },
-          { delta: -2, hour: 8, minutes: 30 },
-          { delta: -1, hour: 7, minutes: 10 },
-        ];
-
-        var today = new Date();
-        var log = days.map(function(info) {
-          var date = new Date(today);
-          date.setDate(today.getDate() + info.delta);
-          date.setHours(info.hour);
-          date.setMinutes(info.minutes);
-          return date.getTime();          
-        });
-
-        return log;
-      },
-
-    });
-  </script>
+  <script>Polymer({is:"m-storage-mediator",properties:{state:Object},onLoad:function(t){console.log("on load");var e=t.detail;e.length&&!this.mock||(e=this._getMock());var o={log:e};this.fire("m-load-state",o)},mock:!1,_getMock:function(){var t=[{delta:-6,hour:7,minutes:15},{delta:-5,hour:8,minutes:9},{delta:-4,hour:7,minutes:1},{delta:-3,hour:7,minutes:5},{delta:-2,hour:8,minutes:30},{delta:-1,hour:7,minutes:10}],e=new Date,o=t.map(function(t){var o=new Date(e);return o.setDate(e.getDate()+t.delta),o.setHours(t.hour),o.setMinutes(t.minutes),o.getTime()});return o}});</script>
 </dom-module>
+</body></html>

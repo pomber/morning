@@ -1,46 +1,13 @@
-<link rel="import" href="../bower_components/polymer/polymer.html">
+<html><head><link rel="import" href="../bower_components/polymer/polymer.html">
 <link rel="import" href="../bower_components/iron-localstorage/iron-localstorage.html">
 
-<dom-module id="m-storage">
+</head><body><dom-module id="m-storage">
 
   <template>
-    <iron-localstorage
-      id="localstorage"
-      name="m-storage" 
-      value="{{_data}}"
-      auto-save-disabled
-      on-iron-localstorage-load="onLoad"
-      on-iron-localstorage-load-empty="onEmptyStorage">
+    <iron-localstorage id="localstorage" name="m-storage" value="{{_data}}" auto-save-disabled="" on-iron-localstorage-load="onLoad" on-iron-localstorage-load-empty="onEmptyStorage">
     </iron-localstorage>
   </template>
 
-  <script>
-    Polymer({
-      is: 'm-storage',
-      
-      properties: {
-        log: Array,
-        _data: Object,
-      },
+  <script>Polymer({is:"m-storage",properties:{log:Array,_data:Object},observers:["onLogChange(log.*)"],onLogChange:function(){this._data=this.log,this.$.localstorage.save()},onLoad:function(){this.fire("storage-load",this._data)},onEmptyStorage:function(){this.fire("storage-load",[])}});</script>
 
-      observers: [
-        'onLogChange(log.*)'
-      ],
-
-      onLogChange: function() {
-        this._data = this.log;
-        this.$.localstorage.save();
-      },
-
-      onLoad: function() {
-        this.fire("storage-load", this._data);
-      },
-
-      onEmptyStorage: function() {
-        this.fire("storage-load", []);
-      },
-
-    });
-  </script>
-
-</dom-module>
+</dom-module></body></html>

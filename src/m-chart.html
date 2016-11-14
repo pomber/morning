@@ -1,6 +1,6 @@
-<link rel="import" href="../bower_components/polymer/polymer.html">
+<html><head><link rel="import" href="../bower_components/polymer/polymer.html">
 
-<dom-module id="m-chart">
+</head><body><dom-module id="m-chart">
   <template>
     <style>
       :host {
@@ -56,9 +56,7 @@
       }
     </style>
 
-    <svg id="svg"
-      xmlns="http://www.w3.org/2000/svg" version="1.1" 
-      viewBox="0 -1 100 1" preserveAspectRatio="xMidYMax">
+    <svg id="svg" xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 -1 100 1" preserveAspectRatio="xMidYMax">
       
       <path d$="[[path]]"></path>
 
@@ -81,143 +79,6 @@
     
   </template>
 
-  <script>
-    Polymer({
-
-      is: 'm-chart',
-
-      properties: {
-        days: Array,
-
-        hs: Array,
-        cs: Array,
-        path: String,
-
-        xmin: Number,
-        ymin: Number,
-        yminstart: { value: -70 },
-        mintime: String,
-        minday: String,
-
-        xmax: Number,
-        ymax: Number,
-        ymaxstart: { value: -80 },
-        maxtime: String,
-        maxday: String,
-      },
-
-      observers: [
-        'calc(days.*)'
-      ],
-
-      b: 20,
-      k: 40,
-      xs: [ 8, 22, 36, 50, 64, 78, 92],
-
-      calc: function() {
-        this.hs = this.getHeights(this.days);        
-        this.cs = this.getCoords();
-        this.path = this.getPath(this.cs);
-
-        var imin = 0;
-        var imax = 0;
-        for (var i = 1; i < this.cs.length; i++) {
-          var y = this.cs[i].y;
-          var ymin = this.cs[imin].y;
-          var ymax = this.cs[imax].y;
-          if (y < ymin) {
-            imin = i;
-          } 
-          if (ymax == null) {
-            imax = i;
-          } else if (ymax < y && y != null) {
-            imax = i;
-          }
-        }
-
-        this.xmin = this.xs[imax];
-        this.ymin = this.cs[imax].y;
-        this.mintime = this.days[imax].hourstring;
-        this.minday = this.days[imax].daystring;
-
-        this.xmax = this.xs[imin];
-        this.ymax = this.cs[imin].y;
-        this.maxtime = this.days[imin].hourstring;
-        this.maxday = this.days[imin].daystring;
-
-        
-      },
-
-      getCoords: function() {
-        var self = this;
-        return self.hs.map(function(h, i) {
-          var y = h === null ? null : -self.b - (self.k * h / 100);
-          return {
-            x: self.xs[i],
-            y: y
-          }
-        });
-      },
-
-      getHeights: function(days) {       
-        var min = 60 * 24;
-        var max = 0;
-        days.forEach(function(day) {
-          if (!day.minutes) {
-            return;
-          }
-          min = Math.min(min, day.minutes);
-          max = Math.max(max, day.minutes);
-        });
-
-        return days.map(function(day) {
-          if (!day.minutes) {
-            return null;
-          }
-
-          if (min == max) {
-            return 50;
-          }
-
-          return 100 * (day.minutes - min) / (max - min);
-        });
-      },
-
-      getPath: function(cs) {
-        var y0 = cs[0].y;
-        var i = 0;
-        while(!y0 && i < cs.length) {
-          y0 = cs[i++].y;
-        }
-
-        if (!y0) return ''; 
-
-        var path = 'M-5 ' + y0;
-        var prev = {x: -5, y: y0};
-
-        for (var i = 0; i < cs.length; i++) {
-          var c = cs[i];
-          if (!c.y) continue;
-
-          path += ' C'
-            + (prev.x + c.x) / 2 + ' ' + prev.y + ' '
-            + (prev.x + c.x) / 2 + ' ' + c.y + ' ' 
-            + c.x + ' ' + c.y;
-
-          prev = c;
-        }
-
-        path += ' h100 v500 h-500';
-        // console.log(path);
-        return path;
-      },
-      
-      c: function(change, index, path) {
-        var v = this.get(path, change.base[index]);
-        if (v || v === 0) return v;
-        return 10;
-      },
-
-    });
-  </script>
+  <script>Polymer({is:"m-chart",properties:{days:Array,hs:Array,cs:Array,path:String,xmin:Number,ymin:Number,yminstart:{value:-70},mintime:String,minday:String,xmax:Number,ymax:Number,ymaxstart:{value:-80},maxtime:String,maxday:String},observers:["calc(days.*)"],b:20,k:40,xs:[8,22,36,50,64,78,92],calc:function(){this.hs=this.getHeights(this.days),this.cs=this.getCoords(),this.path=this.getPath(this.cs);for(var t=0,s=0,i=1;i<this.cs.length;i++){var r=this.cs[i].y,n=this.cs[t].y,a=this.cs[s].y;r<n&&(t=i),null==a?s=i:a<r&&null!=r&&(s=i)}this.xmin=this.xs[s],this.ymin=this.cs[s].y,this.mintime=this.days[s].hourstring,this.minday=this.days[s].daystring,this.xmax=this.xs[t],this.ymax=this.cs[t].y,this.maxtime=this.days[t].hourstring,this.maxday=this.days[t].daystring},getCoords:function(){var t=this;return t.hs.map(function(s,i){var r=null===s?null:-t.b-t.k*s/100;return{x:t.xs[i],y:r}})},getHeights:function(t){var s=1440,i=0;return t.forEach(function(t){t.minutes&&(s=Math.min(s,t.minutes),i=Math.max(i,t.minutes))}),t.map(function(t){return t.minutes?s==i?50:100*(t.minutes-s)/(i-s):null})},getPath:function(t){for(var s=t[0].y,i=0;!s&&i<t.length;)s=t[i++].y;if(!s)return"";for(var r="M-5 "+s,n={x:-5,y:s},i=0;i<t.length;i++){var a=t[i];a.y&&(r+=" C"+(n.x+a.x)/2+" "+n.y+" "+(n.x+a.x)/2+" "+a.y+" "+a.x+" "+a.y,n=a)}return r+=" h100 v500 h-500"},c:function(t,s,i){var r=this.get(i,t.base[s]);return r||0===r?r:10}});</script>
 </dom-module>
+</body></html>

@@ -1,11 +1,11 @@
-<link rel="import" href="../bower_components/polymer/polymer.html">
+<html><head><link rel="import" href="../bower_components/polymer/polymer.html">
 <link rel="import" href="../bower_components/iron-flex-layout/iron-flex-layout-classes.html">
 <link rel="import" href="../bower_components/paper-button/paper-button.html">
 <link rel="import" href="../bower_components/full-width-text/full-width-text.html">
 
-<dom-module id="m-panel">
+</head><body><dom-module id="m-panel">
   <template>
-    <style  include="iron-flex iron-flex-alignment">
+    <style include="iron-flex iron-flex-alignment">
       :host {
         position: absolute;
       }
@@ -36,24 +36,10 @@
     <div class="layout vertical center-justified center">
       <full-width-text class="time">[[time]]</full-width-text>
       <full-width-text class="date">[[date]]</full-width-text>
-      <paper-button raised on-tap="onTap">I'm up!</paper-button>
+      <paper-button raised="" on-tap="onTap">I'm up!</paper-button>
     </div>    
   </template>
 
-  <script>
-    Polymer({
-
-      is: 'm-panel',
-
-      properties: {
-        time: String,
-        date: String,                
-      },
-
-      onTap: function() {
-        this.fire('log-time');
-      }
-
-    });
-  </script>
+  <script>Polymer({is:"m-panel",properties:{time:String,date:String},onTap:function(){this.fire("log-time")}});</script>
 </dom-module>
+</body></html>

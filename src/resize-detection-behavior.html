@@ -1,0 +1,4 @@
+<html><head><link rel="import" href="../bower_components/polymer/polymer.html">
+<script src="../bower_components/element-resize-detector/dist/element-resize-detector.min.js"></script>
+
+<script>ResizeDetectionBehavior={attached:function(){var e=elementResizeDetectorMaker({strategy:"scroll"});console.log("debug");var t=this;e.listenTo(this,function(e){console.log("debug"),t.fire("resize-detected")})}};</script></head><body></body></html>

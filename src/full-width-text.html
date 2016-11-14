@@ -1,0 +1,20 @@
+<html><head><link rel="import" href="../bower_components/polymer/polymer.html">
+<link rel="import" href="resize-detection-behavior.html">
+
+
+
+</head><body><dom-module id="full-width-text">
+  <template>
+    <style>
+      :host {
+        display: block;
+      }
+    </style>
+
+    <content></content>
+
+  </template>
+
+  <script>function getTextWidth(t,e){var o=getTextWidth.canvas||(getTextWidth.canvas=document.createElement("canvas")),n=o.getContext("2d");n.font=e;var r=n.measureText(t);return r.width}function getStyle(t,e){if(window.getComputedStyle)return getComputedStyle(t).getPropertyValue(e);try{return t.currentStyle[e]}catch(t){return""}}Polymer({is:"full-width-text",behaviors:[ResizeDetectionBehavior],properties:{log:Boolean},listeners:{"resize-detected":"scale"},scale:function(){this._scale(this)},attached:function(){console.log("full text attached")},_scale:function(t){var e=1,o=150,n=t.clientWidth-1,r=t.innerText,a={};a.target=n,a.text=r,a.data=[];var l=(e+o)/2;t.style.fontSize=l+"px";for(var i=0;i<15;i++){var c=getStyle(t,"font"),s=getTextWidth(r,c);a.data.push({"font size":l,"current width":s,font:c}),s<n?e=l:o=l,l=(e+o)/2,t.style.fontSize=l+"px"}return this._log(a),a},_log:function(t){this.log&&(console.groupCollapsed("full-width-text: "+t.text),console.log("target width: "+t.target),console.table(t.data),console.groupEnd())}});</script>
+</dom-module>
+</body></html>
