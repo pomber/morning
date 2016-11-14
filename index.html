@@ -14,7 +14,7 @@
     <link rel="shortcut icon" sizes="32x32" href="src/img/app-icon.png">
     <meta name="theme-color" content="#29b6f6">
 
-    <link rel="manifest" href="/manifest.json">
+    <link rel="manifest" href="manifest.json">
 
     <script>
       // setup Polymer options
@@ -30,7 +30,7 @@
         } else {
           // polyfill web components
           var e = document.createElement('script');
-          e.src = '/bower_components/webcomponentsjs/webcomponents-lite.min.js';
+          e.src = 'bower_components/webcomponentsjs/webcomponents-lite.min.js';
           document.head.appendChild(e);
         }
       })();
@@ -38,12 +38,12 @@
       // load pre-caching service worker
       if ('serviceWorker' in navigator) {
         window.addEventListener('load', function() {
-          navigator.serviceWorker.register('/service-worker.js');
+          navigator.serviceWorker.register('service-worker.js');
         });
       }
     </script>
 
-    <link rel="import" href="/src/morning-app.html">
+    <link rel="import" href="src/morning-app.html">
     
     <style>
       body {
