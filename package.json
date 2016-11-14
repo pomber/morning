@@ -10,6 +10,7 @@
   "scripts": {
     "dev": "browser-sync start --server --files \"*.html, src/*.html, src/*.js\" ",
     "test": "polymer test",
+    "build": "polymer build",
     "deploy": "gh-pages-deploy",
     "watch": "browser-sync start --proxy localhost:8080 --files \"*/*.html, src/*.js\" "
   },
@@ -22,5 +23,12 @@
   "bugs": {
     "url": "https://github.com/pomber/morning/issues"
   },
-  "homepage": "https://github.com/pomber/morning#readme"
+  "homepage": "https://github.com/pomber/morning#readme",
+  "gh-pages-deploy": {
+    "staticpath": "build/bundled",
+    "prep": [
+      "build"
+    ],
+    "noprompt": false
+  }
 }
